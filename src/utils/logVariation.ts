@@ -25,7 +25,7 @@ export const logVariation = () => {
       const spinner = speed === 'off' ? '○' : spinChars[idx % spinChars.length]
       idx = (idx + 1) % spinChars.length
 
-      const face = wink ? '(○ ‿ ○)' : '(- ‿ ○)'
+      const face = wink ? '(- ‿ ○)' : '(○ ‿ ○)'
 
       const frame = `${spinner} Serving variation: ${variationName} ${face}`
       const color = speed === 'surprise' ? 'rainbow' : 'blue'
