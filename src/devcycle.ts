@@ -1,25 +1,29 @@
 import {
   initializeDevCycle,
   DevCycleClient,
-} from "@devcycle/nodejs-server-sdk";
+  DevCycleCloudClient,
+} from "@devcycle/nodejs-server-sdk"
 
-const DEVCYCLE_SERVER_SDK_KEY = process.env.DEVCYCLE_SERVER_SDK_KEY as string;
+const DEVCYCLE_SERVER_SDK_KEY = process.env.DEVCYCLE_SERVER_SDK_KEY as string
 
-let devcycleClient: DevCycleClient;
-
+let devcycleCloudClient: DevCycleCloudClient
 async function initializeDevCycleClient() {
-  devcycleClient = await initializeDevCycle(DEVCYCLE_SERVER_SDK_KEY, {
-    logLevel: "info",
+  devcycleCloudClient = initializeDevCycle(DEVCYCLE_SERVER_SDK_KEY, {
+    logLevel: "warn",
+    enableCloudBucketing: true,
     // Controls the polling interval in milliseconds to fetch new environment config changes
     configPollingIntervalMS: 5 * 1000,
     // Controls the interval between flushing events to the DevCycle servers
-    eventFlushIntervalMS: 1000,
-  }).onClientInitialized();
-  return devcycleClient;
+    eventFlushIntervalMS: 10000,
+
+    // eventsAPIURI: "http://localhost:4032",
+    // configCDNURI: "https://local-config-cdn.devcycle.com",
+  })
+  // return devcycleClient
 }
 
-function getDevCycleClient() {
-  return devcycleClient;
+function getDevCycleCloudClient() {
+  return devcycleCloudClient
 }
 
-export { initializeDevCycleClient, getDevCycleClient };
+export { initializeDevCycleClient, getDevCycleCloudClient }

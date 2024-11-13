@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { getDevCycleClient } from "../devcycle";
+import { Request, Response } from "express"
+import { getDevCycleCloudClient } from "../devcycle"
 
 const greetings = {
   default: {
@@ -18,18 +18,18 @@ const greetings = {
     header: "You're getting the hang of things.",
     body: "By creating a new Variation with new Variable values and toggling it on for all users, you've already explored the fundamental concepts within DevCycle. There's still so much more to the platform, so go ahead and complete the onboarding flow and play around with the feature that controls this example in your dashboard.",
   },
-};
+}
 
-export default (req: Request, res: Response) => {
-  const step = getDevCycleClient().variableValue<keyof typeof greetings>(
+export default async (req: Request, res: Response) => {
+  const step = await getDevCycleCloudClient().variableValue(
     req.user,
-    "example-text",
+    "yolo",
     "default"
-  );
-  const { header, body } = greetings[step];
+  )
+  const { header, body } = greetings[step as keyof typeof greetings]
 
-  res.set({ "Content-Type": "text/html" });
+  res.set({ "Content-Type": "text/html" })
   res.send(
     `<h2>${header}</h2><p>${body}</p><p><a href="/variables">All Variables</a></p>`
-  );
-};
+  )
+}
