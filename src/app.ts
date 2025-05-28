@@ -1,14 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
-import express, { Request } from "express";
+import "./types/express-augmentation";
+import express, { Request, Response, NextFunction } from "express";
 import { initializeDevCycleClient } from "./devcycle";
 import greetingHandler from "./routes/greeting";
 import { logVariation } from "./utils/logVariation";
-import { DevCycleUser } from "@devcycle/nodejs-server-sdk";
-
-export interface DevCycleRequest extends Request {
-  user: DevCycleUser;
-}
 
 async function run() {
   const devcycleClient = await initializeDevCycleClient();
@@ -26,7 +22,7 @@ async function run() {
     });
     next();
   });
-  app.use((req, res, next) => {
+  app.use((req: Request, res: Response, next: NextFunction) => {
     /**
      * In a real application you would build the user object based on the
      * authenticated user
@@ -47,7 +43,7 @@ async function run() {
   /**
    * Return all variable values for debugging purposes
    */
-  app.get("/variables", (req, res) => {
+  app.get("/variables", (req: Request, res: Response) => {
     const variables = devcycleClient.allVariables(req.user);
     res.json(variables);
   });

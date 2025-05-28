@@ -12,8 +12,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "files": [
-    "src/express.d.ts"
   ]
 }

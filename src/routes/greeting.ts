@@ -21,11 +21,10 @@ const greetings = {
 };
 
 export default (req: Request, res: Response) => {
-  const step = getDevCycleClient().variableValue<string, keyof typeof greetings>(
-    req.user,
-    "example-text",
-    "default"
-  );
+  const step = getDevCycleClient().variableValue<
+    string,
+    keyof typeof greetings
+  >(req.user, "example-text", "default");
   const { header, body } = greetings[step];
 
   res.set({ "Content-Type": "text/html" });

@@ -21,6 +21,7 @@
 
 # IDE
 .idea/
+.yarn/
 
 npm-debug.log*
 yarn-debug.log*
