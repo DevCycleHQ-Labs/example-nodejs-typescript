@@ -25,5 +25,12 @@
         "ts-jest": "^29.1.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.3.3"
-    }
+    },
+    "resolutions": {
+        "@devcycle/bucketing-assembly-script": "file:../../js-sdks/lib/shared/bucketing-assembly-script",
+        "@devcycle/js-cloud-server-sdk": "file:../../js-sdks/dist/sdk/js-cloud-server",
+        "@devcycle/nodejs-server-sdk": "file:../../js-sdks/dist/sdk/nodejs",
+        "@devcycle/types": "file:../../js-sdks/dist/lib/shared/types"
+    },
+    "packageManager": "yarn@4.9.1"
 }
